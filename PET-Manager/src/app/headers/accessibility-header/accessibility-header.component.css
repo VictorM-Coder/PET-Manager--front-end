@@ -1,0 +1,15 @@
+.button-accessibility{
+  width: 35px;
+  height: 35px;
+  border-radius: 45px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-accessibility:hover{
+  cursor: pointer;
+}

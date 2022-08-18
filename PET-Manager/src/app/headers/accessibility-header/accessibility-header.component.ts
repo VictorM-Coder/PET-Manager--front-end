@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-accessibility-header',
+  selector: 'accessibility-header',
   templateUrl: './accessibility-header.component.html',
   styleUrls: ['./accessibility-header.component.css']
 })

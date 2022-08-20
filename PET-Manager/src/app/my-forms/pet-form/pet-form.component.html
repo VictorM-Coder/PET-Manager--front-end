@@ -1,0 +1,117 @@
+<div class="mt-5">
+  <div class="row g-0 shadow-sm">
+    <div class="col background-primary">
+      <div class="d-flex justify-content-center mt-5">
+        <div>
+          <div class="form-group">
+            <input class="input-file" type="file" id="file" accept="image/,.JPG">
+            <label class="label-file" for="file">Choose File</label>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col">
+      <form class="row py-4 bg-white">
+        <div class="col-12">
+          <h1 class="dds__display-4 form-item">Register PET</h1>
+        </div>
+
+        <!--Coluna 1-->
+        <div class="col-6">
+
+          <div class="dds__input-text__container form-item">
+            <label id="sample-input-label" for="sample-input">PET's name</label>
+            <div class="dds__input-text__wrapper">
+                <input [(ngModel)]="pet.name" type="text" class="dds__input-text" placeholder="Puppy" maxlength="256" name="name" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+            </div>
+          </div>
+
+          <div class="dds__select form-item" data-dds="select">
+            <label id="select-0Label" for="select-0">Animal Class</label>
+            <div class="dds__select__wrapper">
+                <select [(ngModel)]="pet.animalClass" name="animalClass" id="select-0" class="dds__select__field" aria-describedby="select-0Helper">
+                    <option value="MAMMAL">Mammal</option>
+                    <option value="BIRD">Bird</option>
+                    <option value="REPTILE">Reptile</option>
+                    <option value="AMPHIBIAM">Amphibiam</option>
+                    <option value="FISH">Fish</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="dds__date-picker form-item" data-dds="date-picker">
+            <label id="date-picker-544136349-label" for="date-picker-544136349" class="dds__date-picker__label">PET's birthday</label>
+            <div class="dds__date-picker__wrapper">
+              <input
+                [(ngModel)]="pet.birthday"
+
+                type="date"
+                class="dds__date-picker__input"
+                placeholder="Enter the date"
+                required=""
+                maxlength="256"
+                id="date-picker-544136349"
+                name="birthday"
+                aria-labelledby="date-picker-544136349-label date-picker-544136349-helper"
+              />
+            </div>
+          </div>
+
+          <div class="dds__checkbox form-item">
+            <label class="dds__checkbox__label" for="checkbox-input-1">
+                <input
+                    [(ngModel)]="pet.vaccinated"
+                    
+                    type="checkbox"
+                    tabindex="0"
+                    id="checkbox-input-1"
+                    name="vaccinated"
+                    class="dds__checkbox__input"
+                />
+                <span>PET is vaccinated</span>
+            </label>
+        </div>
+
+        </div>
+
+      
+
+        <!--Coluna 2-->
+        <div class="col-6">
+
+          <div class="dds__input-text__container form-item">
+            <label id="sample-input-label" for="sample-input">PET's breed</label>
+            <div class="dds__input-text__wrapper">
+                <input [(ngModel)]="pet.breed" type="text" class="dds__input-text" placeholder="Husk" maxlength="256" name="breed" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+            </div>
+          </div>
+
+          <div class="dds__select form-item" data-dds="select">
+            <label id="select-1Label" for="select-1">Gender</label>
+            <div class="dds__select__wrapper">
+                <select [(ngModel)]="pet.gender" name="gender" id="select-1" class="dds__select__field" aria-describedby="select-1Helper">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>                   
+                </select>
+            </div>
+          </div>
+
+          <div class="dds__input-text__container form-item">
+            <label id="sample-input-label" for="sample-input">Weight</label>
+            <div class="dds__input-text__wrapper">
+                <input [(ngModel)]="pet.weight" min="0" type="number" class="dds__input-text" placeholder="XX.X" maxlength="256" name="weight" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+            </div>
+          </div>
+
+        </div>
+        <div class="col-12">
+          <create-button-bar [pet]="pet"></create-button-bar>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

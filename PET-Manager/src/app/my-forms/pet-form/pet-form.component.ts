@@ -1,4 +1,4 @@
-import { Pet } from './../../model/pet';
+import { Pet } from '../../model/pet';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({

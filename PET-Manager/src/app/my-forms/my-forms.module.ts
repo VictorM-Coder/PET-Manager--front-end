@@ -8,7 +8,7 @@ import { CreateButtonBarComponent } from './create-button-bar/create-button-bar.
 @NgModule({
   declarations: [
     PetFormComponent,
-    CreateButtonBarComponent,
+    CreateButtonBarComponent
   ],
   imports: [
     CommonModule
@@ -17,4 +17,4 @@ import { CreateButtonBarComponent } from './create-button-bar/create-button-bar.
     PetFormComponent
   ]
 })
-export class FormsModule { }
+export class MyFormsModule { }

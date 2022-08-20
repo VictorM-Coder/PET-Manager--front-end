@@ -25,7 +25,7 @@
           <div class="dds__input-text__container form-item">
             <label id="sample-input-label" for="sample-input">PET's name</label>
             <div class="dds__input-text__wrapper">
-                <input [(ngModel)]="pet.name" type="text" class="dds__input-text" placeholder="Puppy" maxlength="256" name="sample-input" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+                <input [(ngModel)]="pet.name" type="text" class="dds__input-text" placeholder="Puppy" maxlength="256" name="name" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
             </div>
           </div>
 
@@ -54,7 +54,7 @@
                 required=""
                 maxlength="256"
                 id="date-picker-544136349"
-                name="date-picker-544136349"
+                name="birthday"
                 aria-labelledby="date-picker-544136349-label date-picker-544136349-helper"
               />
             </div>
@@ -68,7 +68,7 @@
                     type="checkbox"
                     tabindex="0"
                     id="checkbox-input-1"
-                    name="name"
+                    name="vaccinated"
                     class="dds__checkbox__input"
                 />
                 <span>PET is vaccinated</span>
@@ -85,7 +85,7 @@
           <div class="dds__input-text__container form-item">
             <label id="sample-input-label" for="sample-input">PET's breed</label>
             <div class="dds__input-text__wrapper">
-                <input [(ngModel)]="pet.breed" type="text" class="dds__input-text" placeholder="Husk" maxlength="256" name="sample-input" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+                <input [(ngModel)]="pet.breed" type="text" class="dds__input-text" placeholder="Husk" maxlength="256" name="breed" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
             </div>
           </div>
 
@@ -102,7 +102,7 @@
           <div class="dds__input-text__container form-item">
             <label id="sample-input-label" for="sample-input">Weight</label>
             <div class="dds__input-text__wrapper">
-                <input [(ngModel)]="pet.weight" type="number" class="dds__input-text" placeholder="XX.X" maxlength="256" name="sample-input" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
+                <input [(ngModel)]="pet.weight" min="0" type="number" class="dds__input-text" placeholder="XX.X" maxlength="256" name="weight" id="sample-input" required="" aria-labelledby="sample-input-label sample-input-helper">
             </div>
           </div>
 

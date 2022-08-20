@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   pet: Pet = {
     id: 0,
-    name: '',
-    breed: '',
-    weight: 0,
-    birthday: new Date('1995-10-17T03:24:00'),
-    gender: '',
+    name: "",
+    breed: "",
+    weight: 0.0,
+    birthday: new Date('1900-10-10T03:24:00'),
+    gender: 'MALE',
     vaccinated: false,
-    animalClass: '',
+    animalClass: 'MAMMAL',
     image: null,
   };
   title = 'PET-Manager';

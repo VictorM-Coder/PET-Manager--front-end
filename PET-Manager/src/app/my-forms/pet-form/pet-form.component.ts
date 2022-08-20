@@ -8,19 +8,21 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 })
 export class PetFormComponent implements OnInit {
 
-  @Input() pet: Pet = {
-    id: 0,
-    name: '',
-    breed: '',
-    weight: 0,
-    birthday: new Date('1995-12-17T03:24:00'),
-    gender: '',
-    vaccinated: true,
-    animalClass: '',
-    image: null,
-  };;
+  @Input() pet: Pet;
 
-  constructor() { }
+  constructor() {
+    this.pet = {
+      id: 0,
+      name: '',
+      breed: '',
+      weight: 0,
+      birthday: new Date('1995-12-17T03:24:00'),
+      gender: '',
+      vaccinated: false ,
+      animalClass: '',
+      image: null,
+    }; 
+  }
 
   ngOnInit(): void {
   }

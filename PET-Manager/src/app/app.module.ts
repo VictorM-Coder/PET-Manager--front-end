@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeadersModule } from './headers/headers.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   schemas: [
@@ -17,7 +18,8 @@ import { HeadersModule } from './headers/headers.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HeadersModule
+    HeadersModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

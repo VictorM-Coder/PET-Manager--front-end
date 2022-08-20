@@ -1,9 +1,20 @@
 <div class="mt-5">
   <div class="row g-0 shadow-sm">
-    <div class="col background-primary"></div>
+    <div class="col background-primary">
+      <div class="d-flex justify-content-center mt-5">
+        <div>
+          <div class="form-group">
+            <input class="input-file" type="file" id="file" accept="image/,.JPG">
+            <label class="label-file" for="file">Choose File</label>
+        </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="col">
-      <form class="row py-4">
+      <form class="row py-4 bg-white">
         <div class="col-12">
           <h1 class="dds__display-4 form-item">Register PET</h1>
         </div>
@@ -36,6 +47,9 @@
             <label id="date-picker-544136349-label" for="date-picker-544136349" class="dds__date-picker__label">Date Picker</label>
             <div class="dds__date-picker__wrapper">
               <input
+                #inputDate
+                [valueAsDate]="pet.birthday"
+
                 type="date"
                 class="dds__date-picker__input"
                 placeholder="Enter the date"
@@ -50,7 +64,9 @@
 
           <div class="dds__checkbox form-item">
             <label class="dds__checkbox__label" for="checkbox-input-1">
-                <input 
+                <input
+                    [checked]="pet.vaccinated"
+                    (change)="pet.vaccinated = !pet.vaccinated"
                     type="checkbox"
                     tabindex="0"
                     id="checkbox-input-1"

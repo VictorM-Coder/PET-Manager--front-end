@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PetFormComponent } from './pet-form/pet-form.component';
 import { CreateButtonBarComponent } from './create-button-bar/create-button-bar.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { CreateButtonBarComponent } from './create-button-bar/create-button-bar.
     CreateButtonBarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     PetFormComponent

@@ -1,5 +1,5 @@
 import { Pet } from '../../model/pet';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'pet-form',
@@ -8,17 +8,17 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class PetFormComponent implements OnInit {
 
-  pet: Pet = {
+  @Input() pet: Pet = {
     id: 0,
     name: '',
     breed: '',
     weight: 0,
     birthday: new Date('1995-12-17T03:24:00'),
     gender: '',
-    vaccinated: false,
+    vaccinated: true,
     animalClass: '',
     image: null,
-  };
+  };;
 
   constructor() { }
 

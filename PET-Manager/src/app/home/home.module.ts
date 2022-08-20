@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,

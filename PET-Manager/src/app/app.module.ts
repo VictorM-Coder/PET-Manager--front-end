@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeadersModule } from './headers/headers.module';
 import { MyFormsModule } from "./my-forms/my-forms.module";
+import { HomeModule } from './home/home.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MyFormsModule } from "./my-forms/my-forms.module";
     AppRoutingModule,
     HeadersModule,
     MyFormsModule,
-    FormsModule
+    FormsModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

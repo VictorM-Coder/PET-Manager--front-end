@@ -19,4 +19,17 @@ export class AppComponent {
     image: null,
   };
   title = 'PET-Manager';
+
+  constructor(){
+    if(localStorage.getItem('fontSize') !== null){
+      updateFontSize()
+    }else{
+      localStorage.setItem('fontSize', '16')
+    }
+  }
+}
+
+export function updateFontSize():void{
+  let size:number =  Number(localStorage.getItem('fontSize'))
+  document.getElementsByTagName('html')[0].style.fontSize = `${size}px`
 }

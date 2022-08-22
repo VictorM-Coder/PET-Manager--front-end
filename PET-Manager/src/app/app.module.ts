@@ -21,13 +21,13 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     AppRoutingModule,
     HeadersModule,
-    MyFormsModule,
     FormsModule,
-    HomeModule
+    HomeModule,
+    MyFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 
 })
-export class AppModule { 
+export class AppModule {
 }

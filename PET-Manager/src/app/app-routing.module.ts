@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./my-forms/my-forms.module').then(m => m.MyFormsModule)
+  },
+  {
+    path: 'pet',
+    loadChildren: () => import('./my-forms/my-forms.module').then(m => m.MyFormsModule)
   }
 ];
 

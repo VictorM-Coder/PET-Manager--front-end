@@ -6,3 +6,8 @@
 .div-name{
   height: 50px;
 }
+
+#card-body:hover{
+  transform: scale(1.02);
+  cursor: pointer;
+}

@@ -1,5 +1,7 @@
+import { petDefault } from 'src/app/model/pet-default';
 import { Pet } from '../../model/pet';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'pet-form',
@@ -9,22 +11,23 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class PetFormComponent implements OnInit {
 
   @Input() pet: Pet;
+  @Input() id: number = 0
 
-  constructor() {
-    this.pet = {
-      id: 0,
-      name: '',
-      breed: '',
-      weight: 0,
-      birthday: new Date('1995-12-17T03:24:00'),
-      gender: '',
-      vaccinated: false ,
-      animalClass: '',
-      image: null,
-    }; 
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.pet = petDefault
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      (queryParams: any) => {
+        this.id = queryParams.id
+    })
+
+    if(this.id === 0 || this.id === undefined){
+      this.pet = petDefault
+    }else{
+      this.pet = petDefault
+    }
   }
 
 }

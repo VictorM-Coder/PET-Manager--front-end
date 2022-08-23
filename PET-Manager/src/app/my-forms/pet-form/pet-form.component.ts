@@ -1,3 +1,4 @@
+import { PetService } from './../../services/pet.service';
 import { petDefault } from 'src/app/model/pet-default';
 import { Pet } from '../../model/pet';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +16,7 @@ export class PetFormComponent implements OnInit {
   @ViewChild('imgInput',{static: false}) imgInput!: ElementRef
   @ViewChild('imgOutput', {static: false}) imgOutput!: ElementRef
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private petService: PetService) {
     this.pet = petDefault
   }
 
@@ -28,31 +29,32 @@ export class PetFormComponent implements OnInit {
     if(this.id === 0 || this.id === undefined){
       this.pet = petDefault
     }else{
-      this.pet = petDefault
+      this.petService.findById(this.id).subscribe(pet => this.pet = pet)
     }
   }
+  
 	msg = "";
-	
+
 	//selectFile(event) { //Angular 8
 	selectFile(event: any) { //Angular 11, for stricter type
 		if(!event.target.files[0] || event.target.files[0].length == 0) {
 			this.msg = 'You must select an image';
 			return;
 		}
-		
+
 		var mimeType = event.target.files[0].type;
-		
+
 		if (mimeType.match(/image\/*/) == null) {
 			this.msg = "Only images are supported";
 			return;
 		}
-		
+
 		var reader = new FileReader();
 		reader.readAsDataURL(event.target.files[0]);
-		
+
 		reader.onload = (_event) => {
 			this.pet.image = reader.result
-			
+
       this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + reader.result + ") no-repeat; background-size: 300px 300px;")
 		}
 	}

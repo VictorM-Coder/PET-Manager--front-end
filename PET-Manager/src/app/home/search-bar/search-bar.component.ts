@@ -15,7 +15,6 @@ export class SearchBarComponent implements OnInit {
 
   @Input() searchContent: SearchContent = {
     animalClass: 'NONE',
-    gender: 'NONE',
     minWeight: undefined,
     maxWeight: undefined
   }
@@ -25,7 +24,6 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {
     let searchInput: SearchContent = {
       animalClass: 'NONE',
-      gender: 'NONE',
       maxWeight: undefined,
       minWeight: undefined
     }
@@ -37,7 +35,6 @@ export class SearchBarComponent implements OnInit {
 
     if(!(JSON.stringify(searchInput) === "{}")){
       this.searchContent.animalClass = searchInput.animalClass;
-      this.searchContent.gender = searchInput.gender
       this.searchContent.maxWeight = searchInput.maxWeight
       this.searchContent.minWeight = searchInput.minWeight
     }
@@ -45,7 +42,6 @@ export class SearchBarComponent implements OnInit {
 
   ngAfterViewInit(){
     this.selectAnimalClass.nativeElement.value = this.searchContent.animalClass
-    this.selectGender.nativeElement.value = this.searchContent.gender
 
     if(this.searchContent.maxWeight !== undefined){
       this.maxWeight.nativeElement.value = Number(this.searchContent.maxWeight)
@@ -64,10 +60,6 @@ export class SearchBarComponent implements OnInit {
 
   changeAnimalClass(){
     this.searchContent.animalClass = this.selectAnimalClass.nativeElement.value
-  }
-
-  changeGender(){
-    this.searchContent.gender = this.selectGender.nativeElement.value
   }
 
   inputMinWeight(){

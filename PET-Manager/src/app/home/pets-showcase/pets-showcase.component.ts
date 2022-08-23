@@ -1,5 +1,8 @@
+import { SearchContent } from './../../model/search-content';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Pet } from './../../model/pet';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PetService } from 'src/app/services/pet.service';
 
 @Component({
   selector: 'pets-showcase',
@@ -7,79 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pets-showcase.component.css']
 })
 export class PetsShowcaseComponent implements OnInit {
-  pets: Pet[]
+  @Input() pets: Pet[] = []
+  @Input() searchContent!: SearchContent
 
-  constructor() { 
-    this.pets = [
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      },
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      },
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      },
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      },
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      },
-      {
-        id: 0,
-        name: 'JOJO',
-        breed: '',
-        weight: 0,
-        birthday: new Date('1995-12-17T03:24:00'),
-        gender: '',
-        vaccinated: false ,
-        animalClass: '',
-        image: null,
-      }
-    ]
+  constructor(private petService: PetService, private router: Router, private route: ActivatedRoute) {
+    this.petService.findall().subscribe(pets => this.pets = pets)
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      (queryParams: any) => {
+        this.searchContent = queryParams
+    })
+
+    if(this.searchContent.animalClass === 'NONE' && this.searchContent.gender === 'NONE' && this.searchContent.maxWeight === undefined && this.searchContent.minWeight === undefined){
+      this.petService.findall().subscribe(pets => this.pets = pets)
+      console.log(this.pets)
+    }
+
+
   }
 }

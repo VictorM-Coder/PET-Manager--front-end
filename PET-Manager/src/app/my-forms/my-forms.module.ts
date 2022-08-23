@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { PetFormComponent } from './pet-form/pet-form.component';
 import { CreateButtonBarComponent } from './create-button-bar/create-button-bar.component';
 import { FormsModule } from '@angular/forms';
+import { EditButtonBarComponent } from './edit-button-bar/edit-button-bar.component';
 
 
 
 @NgModule({
   declarations: [
     PetFormComponent,
-    CreateButtonBarComponent
+    CreateButtonBarComponent,
+    EditButtonBarComponent
   ],
   imports: [
     CommonModule,

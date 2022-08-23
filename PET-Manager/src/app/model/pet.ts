@@ -7,5 +7,5 @@ export interface Pet{
   gender: string,
   vaccinated: boolean,
   animalClass: string,
-  image: File | null,
+  image: string | ArrayBuffer| null,
 }

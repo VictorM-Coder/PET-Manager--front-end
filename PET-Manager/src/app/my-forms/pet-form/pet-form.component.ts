@@ -12,6 +12,8 @@ export class PetFormComponent implements OnInit {
 
   @Input() pet: Pet;
   @Input() id: number = 0
+  @ViewChild('imgInput',{static: false}) imgInput!: ElementRef
+  @ViewChild('imgOutput', {static: false}) imgOutput!: ElementRef
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.pet = petDefault
@@ -29,5 +31,29 @@ export class PetFormComponent implements OnInit {
       this.pet = petDefault
     }
   }
-
+	msg = "";
+	
+	//selectFile(event) { //Angular 8
+	selectFile(event: any) { //Angular 11, for stricter type
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+		
+		var mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.pet.image = reader.result
+			
+      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + reader.result + ") no-repeat; background-size: 300px 300px;")
+		}
+	}
 }

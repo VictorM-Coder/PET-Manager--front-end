@@ -1,5 +1,9 @@
+import { petDefault } from './../../model/pet-default';
+import { PetService } from './../../services/pet.service';
 import { Pet } from './../../model/pet';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'edit-button-bar',
@@ -8,9 +12,32 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EditButtonBarComponent implements OnInit {
   @Input() pet?: Pet
-  constructor() { }
+  constructor(private petService: PetService, private router: Router, private route: ActivatedRoute) {
+   }
 
   ngOnInit(): void {
+
+  }
+
+  cancel(){
+    this.router.navigate(['/home'], {relativeTo: this.route})
+  }
+
+  deletePet(){
+    if(this.pet !== undefined){
+      if(this.pet.id > 0){
+        console.log(this.pet)
+        this.petService.delete(this.pet)
+      }
+    }
+  }
+
+  updatePet(){
+    if(this.pet !== undefined){
+      if(this.pet.id > 0){
+        this.petService.update(this.pet)
+      }
+    }
   }
 
 }

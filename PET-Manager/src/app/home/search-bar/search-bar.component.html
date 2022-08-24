@@ -3,8 +3,10 @@
     <div class="dds__input-text__container">
       <div class="dds__input-text__wrapper">
         <input
+          #inputName
+          (input)="inputNameEvent()"
           type="text"
-          placeholder="Search id"
+          placeholder="Search name"
           class="dds__input-text"
           name="text-input-control-name-843526160"
           id="text-input-control-843526160"
@@ -16,7 +18,7 @@
   </div>
 
   <div class="col-2">
-    <button class="dds__button" type="button">Search</button>
+    <button (click)="search()" class="dds__button" type="button">Search</button>
   </div>
 </div>
 
@@ -25,7 +27,7 @@
     <div class="dds__select form-item" data-dds="select">
       <label id="select-0Label" for="select-0">Animal Class</label>
       <div class="dds__select__wrapper">
-          <select name="animalClass" id="select-0"  class="dds__select__field" aria-describedby="select-0Helper">
+          <select #selectAnimalClass (change)="changeAnimalClass()" name="animalClass" id="select-0"  class="dds__select__field" aria-describedby="select-0Helper">
             <option value="NONE">None</option>
             <option value="MAMMAL">Mammal</option>
             <option value="BIRD">Bird</option>
@@ -39,12 +41,13 @@
 
   <div class="col-6 col-md-3 col-lg-2">
     <div class="dds__select form-item" data-dds="select">
-      <label id="select-1Label" for="select-1">Gender</label>
+      <label id="select-0Label" for="select-1">Weight filter</label>
       <div class="dds__select__wrapper">
-          <select name="gender" id="select-1" class="dds__select__field" aria-describedby="select-1Helper">
+          <select #selectWeight (change)="changeWeightFilter()" name="weightFilter" id="select-1"  class="dds__select__field" aria-describedby="select-0Helper">
             <option value="NONE">None</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
+            <option value="interval">Interval</option>
+            <option value="min weight">Min Weight</option>
+            <option value="max weight">Max Weight</option>
           </select>
       </div>
     </div>
@@ -55,8 +58,11 @@
       <label id="text-input-label-166894271" for="text-input-control-name-166894271">Min weight</label>
       <div class="dds__input-text__wrapper">
         <input
-          type="number"
+          #minWeight
+          (input)="inputMinWeight()"
           min="0"
+          [defaultValue]="0"
+          type="number"
           class="dds__input-text"
           name="text-input-control-name-166894271"
           id="text-input-control-166894271"
@@ -72,8 +78,11 @@
       <label id="text-input-label-166894271" for="text-input-control-name-166894271">Max weight</label>
       <div class="dds__input-text__wrapper">
         <input
-          type="number"
+          #maxWeight
+          (input)="inputMaxWeight()"
           min="0"
+          type="number"
+          [defaultValue]="0"
           class="dds__input-text"
           name="text-input-control-name-166894271"
           id="text-input-control-166894271"

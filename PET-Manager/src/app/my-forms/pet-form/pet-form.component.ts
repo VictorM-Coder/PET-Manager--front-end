@@ -21,18 +21,32 @@ export class PetFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('oninit')
     this.route.queryParams.subscribe(
       (queryParams: any) => {
         this.id = queryParams.id
     })
 
+
+
     if(this.id === 0 || this.id === undefined){
       this.pet = petDefault
     }else{
-      this.petService.findById(this.id).subscribe(pet => this.pet = pet)
+      this.petService.findById(this.id).subscribe(pet =>{
+        this.pet = pet
+        this.imgOutput.nativeElement.setAttribute('src', pet.image)
+      })
+    }
+
+    console.log(this.pet)
+  }
+
+  ngAfterViewInit(){
+    if(this.id !== 0 && this.id !== undefined && this.pet !== undefined){
+      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + this.pet.image + ") no-repeat; background-size: cover")
     }
   }
-  
+
 	msg = "";
 
 	//selectFile(event) { //Angular 8
@@ -53,9 +67,13 @@ export class PetFormComponent implements OnInit {
 		reader.readAsDataURL(event.target.files[0]);
 
 		reader.onload = (_event) => {
-			this.pet.image = reader.result
+			if(this.pet !== undefined){
+        this.pet.image = reader.result
+      }
 
-      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + reader.result + ") no-repeat; background-size: 300px 300px;")
+      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + reader.result + ") no-repeat; background-size: cover")
 		}
 	}
+
+
 }

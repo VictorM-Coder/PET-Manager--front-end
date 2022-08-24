@@ -11,9 +11,8 @@ import { take } from 'rxjs';
   styleUrls: ['./edit-button-bar.component.css']
 })
 export class EditButtonBarComponent implements OnInit {
-  @Input() pet: Pet
+  @Input() pet?: Pet
   constructor(private petService: PetService, private router: Router, private route: ActivatedRoute) {
-    this.pet = petDefault
    }
 
   ngOnInit(): void {
@@ -25,14 +24,18 @@ export class EditButtonBarComponent implements OnInit {
   }
 
   deletePet(){
-    if(this.pet.id > 0){
-      this.petService.delete(this.pet).pipe(take(1))
+    if(this.pet !== undefined){
+      if(this.pet.id > 0){
+        this.petService.delete(this.pet).pipe(take(1))
+      }
     }
   }
 
   updatePet(){
-    if(this.pet.id > 0){
-      //TO-DO
+    if(this.pet !== undefined){
+      if(this.pet.id > 0){
+        //TO-DO
+      }
     }
   }
 

@@ -24,16 +24,24 @@ export class PetService {
     return this.httpClient.get<Pet[]>(URL + `/animalClass/${animalClass}`)
   }
 
-  findAllByGenre(genre: string){
-    return this.httpClient.get<Pet[]>(URL + `/genre/${genre}`)
-  }
-
   findByWeightInterval(start: number, end: number){
     return this.httpClient.get<Pet[]>(URL + '/weightInterval', {params: {'start': start, 'end': end}})
   }
 
   post(pet:Pet){
-    return this.httpClient.post<Pet>(URL, pet)
+    console.log(pet)
+    let petTest = {
+      name:pet.name,
+      breed:pet.breed,
+      weight:pet.weight,
+      image:pet.image,
+      birthday:pet.birthday,
+      vaccinated:pet.vaccinated,
+      gender:pet.gender,
+      animalClass:pet.animalClass
+    }
+
+    return this.httpClient.post<Pet>('http://localhost:8080/api/animal', petTest)
   }
 
   delete(pet: Pet){

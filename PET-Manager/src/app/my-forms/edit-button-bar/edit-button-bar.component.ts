@@ -26,7 +26,8 @@ export class EditButtonBarComponent implements OnInit {
   deletePet(){
     if(this.pet !== undefined){
       if(this.pet.id > 0){
-        this.petService.delete(this.pet).pipe(take(1))
+        console.log(this.pet)
+        this.petService.delete(this.pet)
       }
     }
   }
@@ -34,7 +35,7 @@ export class EditButtonBarComponent implements OnInit {
   updatePet(){
     if(this.pet !== undefined){
       if(this.pet.id > 0){
-        //TO-DO
+        this.petService.update(this.pet)
       }
     }
   }

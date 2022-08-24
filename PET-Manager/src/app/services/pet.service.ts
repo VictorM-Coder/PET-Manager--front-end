@@ -1,3 +1,4 @@
+import { take } from 'rxjs';
 import { Pet } from './../model/pet';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
@@ -29,8 +30,33 @@ export class PetService {
   }
 
   post(pet:Pet){
+    return this.httpClient.post<Pet>('http://localhost:8080/api/animal', this.getPetParam(pet))
+  }
+
+  delete(pet: Pet){
+    return this.httpClient.put<Pet>(URL + `/delete/${pet.id}`, this.getPetParam(pet)).subscribe({
+      next: (v) => console.info('complete'),
+      error: (e) => console.log("Falha ao atualizar pet"),
+      complete: () =>{
+        console.log("funcionou")
+      }
+    })
+  }
+
+  update(pet: Pet){
     console.log(pet)
-    let petTest = {
+    return this.httpClient.put<Pet>(URL + '/update', this.getPetParam(pet)).subscribe({
+      next: (v) => console.info('complete'),
+      error: (e) => console.log("Falha ao atualizar pet"),
+      complete: () =>{
+        console.log("funcionou")
+      }
+    })
+  }
+
+  private getPetParam(pet: Pet){
+    let petParam = {
+      id: pet.id,
       name:pet.name,
       breed:pet.breed,
       weight:pet.weight,
@@ -40,11 +66,6 @@ export class PetService {
       gender:pet.gender,
       animalClass:pet.animalClass
     }
-
-    return this.httpClient.post<Pet>('http://localhost:8080/api/animal', petTest)
-  }
-
-  delete(pet: Pet){
-    return this.httpClient.put<Pet>(URL + `/delete/${pet.id}`, pet)
+    return petParam
   }
 }

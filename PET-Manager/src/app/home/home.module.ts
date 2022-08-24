@@ -17,7 +17,7 @@ import { PetsShowcaseComponent } from './pets-showcase/pets-showcase.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ],
   exports: [
     HomeComponent

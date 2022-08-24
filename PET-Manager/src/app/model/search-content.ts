@@ -1,5 +1,7 @@
 export interface SearchContent{
+  name: string,
   animalClass: string,
-  minWeight: number | undefined ,
-  maxWeight: number | undefined
+  weightFilter: string,
+  minWeight: number,
+  maxWeight: number
 }

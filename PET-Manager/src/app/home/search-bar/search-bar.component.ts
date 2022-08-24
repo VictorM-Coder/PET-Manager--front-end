@@ -8,24 +8,29 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  @ViewChild('inputName', {static: false}) inputName!: ElementRef
   @ViewChild('selectAnimalClass', {static: false}) selectAnimalClass!: ElementRef
-  @ViewChild('selectGender', {static: false}) selectGender!: ElementRef
+  @ViewChild('selectWeight', {static: false}) selectWeight!: ElementRef
   @ViewChild('minWeight', {static: false}) minWeight!: ElementRef
   @ViewChild('maxWeight', {static: false}) maxWeight!: ElementRef
 
   @Input() searchContent: SearchContent = {
+    name: '',
     animalClass: 'NONE',
-    minWeight: undefined,
-    maxWeight: undefined
+    weightFilter: 'NONE',
+    minWeight: 0,
+    maxWeight: 0
   }
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let searchInput: SearchContent = {
+      name: '',
       animalClass: 'NONE',
-      maxWeight: undefined,
-      minWeight: undefined
+      weightFilter: 'NONE',
+      maxWeight: 0,
+      minWeight: 0
     }
 
     this.route.queryParams.subscribe(
@@ -34,14 +39,18 @@ export class SearchBarComponent implements OnInit {
     })
 
     if(!(JSON.stringify(searchInput) === "{}")){
+      this.searchContent.name = searchInput.name
       this.searchContent.animalClass = searchInput.animalClass;
       this.searchContent.maxWeight = searchInput.maxWeight
       this.searchContent.minWeight = searchInput.minWeight
+      this.searchContent.weightFilter = searchInput.weightFilter
     }
   }
 
   ngAfterViewInit(){
     this.selectAnimalClass.nativeElement.value = this.searchContent.animalClass
+    this.selectWeight.nativeElement.value = this.searchContent.weightFilter
+    this.inputName.nativeElement.value = this.searchContent.name
 
     if(this.searchContent.maxWeight !== undefined){
       this.maxWeight.nativeElement.value = Number(this.searchContent.maxWeight)
@@ -50,9 +59,12 @@ export class SearchBarComponent implements OnInit {
       this.minWeight.nativeElement.value = Number(this.searchContent.minWeight)
     }
 
+    this.setWeightInputs()
+
   }
 
   search(){
+    console.log(this.searchContent)
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
     this.router.onSameUrlNavigation = 'reload'
     this.router.navigate(['/home'], {queryParams: this.searchContent, relativeTo: this.route})
@@ -62,8 +74,12 @@ export class SearchBarComponent implements OnInit {
     this.searchContent.animalClass = this.selectAnimalClass.nativeElement.value
   }
 
-  inputMinWeight(){
+  changeWeightFilter(){
+    this.searchContent.weightFilter = this.selectWeight.nativeElement.value
+    this.setWeightInputs()
+  }
 
+  inputMinWeight(){
     this.searchContent.minWeight = Number(this.minWeight.nativeElement.value)
   }
 
@@ -71,4 +87,28 @@ export class SearchBarComponent implements OnInit {
     this.searchContent.maxWeight = Number(this.maxWeight.nativeElement.value)
   }
 
+  inputNameEvent(){
+    this.searchContent.name = this.inputName.nativeElement.value
+  }
+
+  private setWeightInputs(){
+    switch(this.searchContent.weightFilter){
+      case 'NONE':
+        this.minWeight.nativeElement.disabled = true
+        this.maxWeight.nativeElement.disabled =true
+        break
+      case 'interval':
+        this.minWeight.nativeElement.disabled = false
+        this.maxWeight.nativeElement.disabled = false
+        break
+      case 'min weight':
+        this.minWeight.nativeElement.disabled = false
+        this.maxWeight.nativeElement.disabled = true
+        break
+      case 'max weight':
+        this.minWeight.nativeElement.disabled = true
+        this.maxWeight.nativeElement.disabled = false
+        break
+    }
+  }
 }

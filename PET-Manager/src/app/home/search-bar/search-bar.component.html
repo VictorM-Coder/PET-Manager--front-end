@@ -3,8 +3,10 @@
     <div class="dds__input-text__container">
       <div class="dds__input-text__wrapper">
         <input
+          #inputName
+          (input)="inputNameEvent()"
           type="text"
-          placeholder="Search id"
+          placeholder="Search name"
           class="dds__input-text"
           name="text-input-control-name-843526160"
           id="text-input-control-843526160"
@@ -37,6 +39,20 @@
     </div>
   </div>
 
+  <div class="col-6 col-md-3 col-lg-2">
+    <div class="dds__select form-item" data-dds="select">
+      <label id="select-0Label" for="select-1">Weight filter</label>
+      <div class="dds__select__wrapper">
+          <select #selectWeight (change)="changeWeightFilter()" name="weightFilter" id="select-1"  class="dds__select__field" aria-describedby="select-0Helper">
+            <option value="NONE">None</option>
+            <option value="interval">Interval</option>
+            <option value="min weight">Min Weight</option>
+            <option value="max weight">Max Weight</option>
+          </select>
+      </div>
+    </div>
+  </div>
+
   <div class="col-6 col-md-3 col-lg-2 mt-3 mt-md-0">
     <div class="dds__input-text__container">
       <label id="text-input-label-166894271" for="text-input-control-name-166894271">Min weight</label>
@@ -44,8 +60,8 @@
         <input
           #minWeight
           (input)="inputMinWeight()"
-          [max]="maxWeight.valueAsNumber"
           min="0"
+          [defaultValue]="0"
           type="number"
           class="dds__input-text"
           name="text-input-control-name-166894271"
@@ -64,8 +80,9 @@
         <input
           #maxWeight
           (input)="inputMaxWeight()"
-          [min]="minWeight.valueAsNumber"
+          min="0"
           type="number"
+          [defaultValue]="0"
           class="dds__input-text"
           name="text-input-control-name-166894271"
           id="text-input-control-166894271"

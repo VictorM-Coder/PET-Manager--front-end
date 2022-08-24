@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Pet } from './../../model/pet';
 import { Component, Input, OnInit } from '@angular/core';
 import { PetService } from 'src/app/services/pet.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pets-showcase',
@@ -14,7 +15,7 @@ export class PetsShowcaseComponent implements OnInit {
   @Input() searchContent!: SearchContent
 
   constructor(private petService: PetService, private router: Router, private route: ActivatedRoute) {
-    this.petService.findall().subscribe(pets => this.pets = pets)
+    this.pets = []
   }
 
   ngOnInit(): void {
@@ -23,49 +24,52 @@ export class PetsShowcaseComponent implements OnInit {
         this.searchContent = queryParams
     })
 
-  if(!this.animalClassIsNone()){
-    if(!this.maxWeightIsUndefined()){
-      if(!this.minWeightIsUndefined()){//todos são válidos
+    let pets: Observable<Pet[]> = new Observable
 
-      }else{//animalclass e maxweight são válidos
+    if(Object.keys(this.searchContent).length === 0){
+      pets = this.petService.findall()
+    }else{
+      pets = this.getPetList()
+    }
 
+    pets.subscribe(pets => this.pets = pets)
+
+  }
+
+  private getPetList(){
+    let pets: Observable<Pet[]> = new Observable
+    if(this.searchContent.animalClass !== 'NONE'){
+      switch (this.searchContent.weightFilter){
+        case 'NONE':
+          pets = this.petService.findAllByAnimalClass(this.searchContent.name, this.searchContent.animalClass)
+        break
+        case 'interval':
+          pets = this.petService.findByAnimalClassAndWeightInterval(this.searchContent.name, this.searchContent.animalClass, this.searchContent.minWeight, this.searchContent.maxWeight)
+          break
+        case 'min weight':
+          pets = this.petService.findByAnimalClassAndMinWeight(this.searchContent.name, this.searchContent.animalClass, this.searchContent.minWeight)
+          break
+        case 'max weight':
+          pets = this.petService.findByAnimalClassAndMaxWeight(this.searchContent.name, this.searchContent.animalClass, this.searchContent.maxWeight)
+          break
       }
-    }else{//o maxweight não é válido
-
-      if(!this.minWeightIsUndefined()){//animalclass e minweigh são válidos
-
-      }else{//animalclass é válidos
-
+    }else{
+      switch (this.searchContent.weightFilter){
+        case 'NONE':
+          pets = this.petService.findByName(this.searchContent.name)
+        break
+        case 'interval':
+          pets = this.petService.findByWeightInterval(this.searchContent.name, this.searchContent.minWeight, this.searchContent.maxWeight)
+          break
+        case 'min weight':
+          pets = this.petService.findByMinWeight(this.searchContent.name, this.searchContent.minWeight)
+          break
+        case 'max weight':
+          pets = this.petService.findByMaxWeight(this.searchContent.name, this.searchContent.maxWeight)
+          break
       }
     }
-  }else{
-    if(!this.maxWeightIsUndefined()){
-      if(!this.minWeightIsUndefined()){//maxweight e minweight são válidos
-
-      }else{//maxweight é válidos
-
-      }
-    }else{//o maxweight não é válido
-
-      if(!this.minWeightIsUndefined()){//minweigh é válidos
-
-      }else{//todos são inválidos
-        this.petService.findall().subscribe(pets => this.pets = pets)
-      }
-    }
-  }
-
-  }
-
-  private animalClassIsNone(){
-    return this.searchContent.animalClass === 'NONE'
-  }
-
-  private minWeightIsUndefined(){
-    return this.searchContent.minWeight === undefined
-  }
-
-  private maxWeightIsUndefined(){
-    return this.searchContent.maxWeight === undefined
+    return pets;
   }
 }
+

@@ -21,12 +21,36 @@ export class PetService {
     return this.httpClient.get<Pet>(URL + `/${id}`)
   }
 
-  findAllByAnimalClass(animalClass: string){
-    return this.httpClient.get<Pet[]>(URL + `/animalClass/${animalClass}`)
+  findAllByAnimalClass(name: string, animalClass: string){
+    return this.httpClient.get<Pet[]>(URL + `/animalClass`, {params: {'name': name, 'animalClass': animalClass}})
   }
 
-  findByWeightInterval(start: number, end: number){
-    return this.httpClient.get<Pet[]>(URL + '/weightInterval', {params: {'start': start, 'end': end}})
+  findByName(name: string){
+    return this.httpClient.get<Pet[]>(URL + `/search`, {params: {'name': name}})
+  }
+
+  findByWeightInterval(name: string , start: number, end: number){
+    return this.httpClient.get<Pet[]>(URL + '/weightInterval', {params: {'name': name,'start': start, 'end': end}})
+  }
+
+  findByMinWeight(name: string, start: number){
+    return this.httpClient.get<Pet[]>(URL + '/minWeight', {params: {'name': name, 'start': start}})
+  }
+
+  findByMaxWeight(name:string, end: number){
+    return this.httpClient.get<Pet[]>(URL + '/maxWeight', {params: {'name': name, 'end': end}})
+  }
+
+  findByAnimalClassAndWeightInterval(name: string, animalClass: string, start: number, end: number){
+    return this.httpClient.get<Pet[]>(URL + '/animalClass/weightInterval', {params: {'name': name, 'animalClass': animalClass,'start': start, 'end': end}})
+  }
+
+  findByAnimalClassAndMaxWeight(name: string, animalClass: string, end: number){
+    return this.httpClient.get<Pet[]>(URL + '/animalClass/maxWeight', {params: {'name': name, 'animalClass': animalClass, 'end': end}})
+  }
+
+  findByAnimalClassAndMinWeight(name:string, animalClass: string, start: number){
+    return this.httpClient.get<Pet[]>(URL + '/animalClass/minWeight', {params: {'name': name, 'animalClass': animalClass,'start': start}})
   }
 
   post(pet:Pet){

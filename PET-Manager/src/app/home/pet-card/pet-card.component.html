@@ -1,0 +1,7 @@
+<div #cardBody id="card-body" (click)="navigateToCard()">
+  <div class="img-div" [ngStyle]="{background: 'url(' + pet.image + ') no-repeat'}" style="background-size: cover !important;">
+  </div>
+  <div class="background-dark div-name d-flex justify-content-center align-items-center">
+    {{pet.name}}
+  </div>
+</div>

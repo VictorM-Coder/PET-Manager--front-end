@@ -59,10 +59,10 @@ export class PetService {
 
   delete(pet: Pet){
     return this.httpClient.put<Pet>(URL + `/delete/${pet.id}`, this.getPetParam(pet)).subscribe({
-      next: (v) => console.info('complete'),
-      error: (e) => console.log("Falha ao atualizar pet"),
+      next: (v) => window.alert("Pet deleted"),
+      error: (e) => window.alert("Error when deleting"),
       complete: () =>{
-        console.log("funcionou")
+
       }
     })
   }
@@ -70,10 +70,10 @@ export class PetService {
   update(pet: Pet){
     console.log(pet)
     return this.httpClient.put<Pet>(URL + '/update', this.getPetParam(pet)).subscribe({
-      next: (v) => console.info('complete'),
-      error: (e) => console.log("Falha ao atualizar pet"),
+      next: (v) => window.alert("Pet updated"),
+      error: (e) => console.log("Update fail"),
       complete: () =>{
-        console.log("funcionou")
+        
       }
     })
   }

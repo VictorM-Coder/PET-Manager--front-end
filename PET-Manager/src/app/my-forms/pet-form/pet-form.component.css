@@ -15,8 +15,10 @@
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background-color: rgb(204, 204, 204);
+  background-color: rgb(204, 204, 204) !important;
   color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover !important;
 
 }
 

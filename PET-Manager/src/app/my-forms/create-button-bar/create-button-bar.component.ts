@@ -1,5 +1,7 @@
+import { take } from 'rxjs';
 import { Pet } from './../../model/pet';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { PetService } from 'src/app/services/pet.service';
 
 @Component({
   selector: 'create-button-bar',
@@ -9,14 +11,25 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 export class CreateButtonBarComponent implements OnInit {
   @Input() pet?: Pet
 
-  constructor() {
-   }
+  constructor(private petService: PetService) {
+
+  }
 
   ngOnInit(): void {
   }
 
   soutValues(){
-    console.log(this.pet)
+    if(this.pet !== undefined){
+      this.petService.post(this.pet).subscribe({
+        next: (v) => window.alert("New pet created"),
+        error: (e) => {
+          window.alert("create pet fail")
+        },
+        complete: () =>{
+          
+        }
+      })
+    }
   }
 
 }

@@ -4,14 +4,18 @@ menu{
   display: flex;
 }
 li{
-  color: white;
   list-style: none;
-  font-size: 1.2em;
-  font-weight: 400;
 }
 
 li:hover{
   text-decoration: underline;
   cursor: pointer;
   color: white;
+}
+
+.btn-link{
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 400;
 }

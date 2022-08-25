@@ -1,5 +1,8 @@
+import { PetService } from './../../services/pet.service';
+import { petDefault } from 'src/app/model/pet-default';
 import { Pet } from '../../model/pet';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'pet-form',
@@ -9,22 +12,68 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 export class PetFormComponent implements OnInit {
 
   @Input() pet: Pet;
+  @Input() id: number = 0
+  @ViewChild('imgInput',{static: false}) imgInput!: ElementRef
+  @ViewChild('imgOutput', {static: false}) imgOutput!: ElementRef
 
-  constructor() {
-    this.pet = {
-      id: 0,
-      name: '',
-      breed: '',
-      weight: 0,
-      birthday: new Date('1995-12-17T03:24:00'),
-      gender: '',
-      vaccinated: false ,
-      animalClass: '',
-      image: null,
-    }; 
+  constructor(private router: Router, private route: ActivatedRoute, private petService: PetService) {
+    this.pet = petDefault
   }
 
   ngOnInit(): void {
+    console.log('oninit')
+    this.route.queryParams.subscribe(
+      (queryParams: any) => {
+        this.id = queryParams.id
+    })
+
+
+
+    if(this.id === 0 || this.id === undefined){
+      this.pet = petDefault
+    }else{
+      this.petService.findById(this.id).subscribe(pet =>{
+        this.pet = pet
+        this.imgOutput.nativeElement.setAttribute('src', pet.image)
+      })
+    }
+
+    console.log(this.pet)
   }
+
+  ngAfterViewInit(){
+    if(this.id !== 0 && this.id !== undefined && this.pet !== undefined){
+      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + this.pet.image + ") no-repeat; background-size: cover")
+    }
+  }
+
+	msg = "";
+
+	//selectFile(event) { //Angular 8
+	selectFile(event: any) { //Angular 11, for stricter type
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+
+		var mimeType = event.target.files[0].type;
+
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+
+		reader.onload = (_event) => {
+			if(this.pet !== undefined){
+        this.pet.image = reader.result
+      }
+
+      this.imgOutput.nativeElement.setAttribute('style', 'background: url(' + reader.result + ") no-repeat; background-size: cover")
+		}
+	}
+
 
 }

@@ -12,6 +12,6 @@ body{
 }
 
 .background-primary{
-  background-color: #0672CB;
-  color: white;
+  background-color: #0672CB !important;
+  color: white !important;
 }

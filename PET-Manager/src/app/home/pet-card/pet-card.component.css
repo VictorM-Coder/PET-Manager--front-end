@@ -1,0 +1,14 @@
+.img-div{
+  height: 250px;
+  background-color: rgb(109, 109, 109);
+  background-size: cover !important;
+}
+
+.div-name{
+  height: 50px;
+}
+
+#card-body:hover{
+  transform: scale(1.02);
+  cursor: pointer;
+}

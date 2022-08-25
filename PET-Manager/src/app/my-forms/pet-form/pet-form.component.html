@@ -4,8 +4,8 @@
       <div class="d-flex justify-content-center mt-5">
         <div>
           <div class="form-group">
-            <input class="input-file" type="file" id="file" accept="image/,.JPG">
-            <label class="label-file" for="file">Choose File</label>
+            <input #imgInput class="input-file" (change)="selectFile($event)" type="file" id="file" accept="image/,.JPG">
+            <label #imgOutput [ngStyle]="{background: 'url(' + pet.image + ')'}" class="label-file" for="file">Choose File</label>
         </div>
         <div>
           upload a picture of the pet
@@ -110,11 +110,18 @@
           </div>
 
         </div>
-        <div class="col-12">
-          <create-button-bar [pet]="pet"></create-button-bar>
+        <div *ngIf="id === 0 || id === undefined; else elseBlock" class="col-12">
+            <create-button-bar [pet]="pet"></create-button-bar>
         </div>
+        <ng-template #elseBlock>
+          <div class="col-12">
+            <edit-button-bar [pet]="pet"></edit-button-bar>
+          </div>
+        </ng-template>
       </form>
 
     </div>
   </div>
 </div>
+
+

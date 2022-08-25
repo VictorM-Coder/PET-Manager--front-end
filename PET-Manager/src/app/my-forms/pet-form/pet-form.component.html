@@ -3,9 +3,12 @@
     <div class="col background-primary">
       <div class="d-flex justify-content-center mt-5">
         <div>
-          <div class="form-group">
+          <div class="form-group d-flex justify-content-center">
             <input #imgInput class="input-file" (change)="selectFile($event)" type="file" id="file" accept="image/,.JPG">
             <label #imgOutput [ngStyle]="{background: 'url(' + pet.image + ')'}" class="label-file" for="file">Choose File</label>
+        </div>
+        <div class="d-flex justify-content-center py-3">
+          <h3 style="color: white">Upload a picture of the pet</h3>
         </div>
         </div>
       </div>

@@ -11,6 +11,10 @@
 	z-index: -1;
 }
 
+.label-file:hover{
+  cursor: pointer;
+}
+
 .input-file + .label-file{
   width: 300px;
   height: 300px;

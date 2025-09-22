@@ -1,8 +1,3 @@
-
-<h3 align="center"> 
-	🚧 Em Desenvolvimento 🚧
-</h3>
-
 ---
 
 <h1 align="center">
